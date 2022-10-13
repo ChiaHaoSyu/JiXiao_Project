@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class WallGenerator 
+{
+    public static void CreatWalls(HashSet<Vector2Int> floorPositions,TilemapVisualizer tilemapVisualizer)
+    {
+        var basicWallPostions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionList);
+        foreach(var position in basicWallPostions)
+        {
+            tilemapVisualizer.PaintSingleBasicWall(position);
+        }
+    }
+
+    private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionList)
+    {
+        HashSet<Vector2Int> wallPositions = new HashSet<Vector2Int>();
+        foreach(var position in floorPositions)
+        {
+            foreach(var direction in directionList)
+            {   
+                var neighbourPosition = position + direction;
+                if (floorPositions.Contains(neighbourPosition) == false)
+                    wallPositions.Add(neighbourPosition); 
+            }
+        }
+        return wallPositions;
+    }
+}
