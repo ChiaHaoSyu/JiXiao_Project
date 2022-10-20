@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/in progress.unity
     guid: 415fcaea629889e4e9d589e42d1aa575
   - enabled: 1
-    path: Assets/Scenes/JiXiao.unity
-    guid: bb9cb1fbaba5dd24ca00501c0b5f91ee
+    path: Assets/Scenes/JiXiao_newver.unity
+    guid: 65c89e7d438d7f8428ef92de0582be93
   m_configObjects: {}

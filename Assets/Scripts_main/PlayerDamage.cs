@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
+    public int maxHealth = 100;
+    public int currentHealth;
+
+    public HealthBar healthBar;
+    
     private SpriteRenderer playerSprite;
 
     private void Start()
     {
         playerSprite = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
@@ -16,6 +23,7 @@ public class PlayerDamage : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(FlashRed());
+            TakeDamage(10);
         }
     }
 
@@ -24,6 +32,7 @@ public class PlayerDamage : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             StartCoroutine(FlashRed());
+            TakeDamage(10);
         }
     }
 
@@ -32,6 +41,12 @@ public class PlayerDamage : MonoBehaviour
         playerSprite.color = Color.red;
         yield return new WaitForSeconds(0.2f);
         playerSprite.color = Color.white;
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 
 }

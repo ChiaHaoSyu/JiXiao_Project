@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public Transform weaponTrans,wpTrans;
     public Transform pointRight, pointLeft;
 
+    public GameObject weapon,weaponInFloor;
+    public GameObject myWeapon;
+
     public Camera cam;
 
     [SerializeField]
@@ -39,9 +42,9 @@ public class PlayerMovement : MonoBehaviour
         lookDir = lookDir.normalized;
         weaponTrans.right = lookDir;
 
-        SwitchAnim();
-
         LookAt();
+
+        SwitchAnim();
     }
 
     void FixedUpdate()
@@ -89,5 +92,24 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("walk", true);
         }
     }
+
+    void WeaponCheck()
+    {
+        weaponInFloor = null;
+
+        Collider2D[] colls = Physics2D.OverlapCircleAll(transform.position, 1);
+
+        if(colls.Length<0)
+        {
+            for (int i = 0; i < colls.Length; i++)
+            {
+                if(colls[i].CompareTag("Weapon"))
+                {
+                    weaponInFloor = colls[i].gameObject;
+                }
+            }
+        }
+    }
+
 
 }
