@@ -9,6 +9,7 @@ public class EnemyDamage : MonoBehaviour
     public float destoryTime;
 
     public GameObject floatPoint;
+    public GameObject coinsPrefeb;
 
     private SpriteRenderer enemySprite;
     private Animator anim;
@@ -47,6 +48,7 @@ public class EnemyDamage : MonoBehaviour
             this.GetComponent<EnemyAI>().enabled = false;
             this.GetComponent<Collider2D>().enabled = false;
             Destroy(gameObject,destoryTime);
+            GameObject coins = Instantiate(coinsPrefeb, transform.position, Quaternion.identity);
         }
     }
 

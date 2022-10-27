@@ -5,31 +5,27 @@ using UnityEngine.UI;
 
 public class Interaction : MonoBehaviour
 {
-    public GameObject image;
     public bool playerInRange;
     
-
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
-            if(image.activeInHierarchy)
-            {
-                image.SetActive(false);
-            }
-            else
-            {
-                image.SetActive(true);
-            }
+            OnPlayerInteractEvent();
         }
 
     }
+
+    protected virtual void OnPlayerEnterEvent() { }
+    protected virtual void OnPlayerExitEvent() { }
+    protected virtual void OnPlayerInteractEvent() { }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
             playerInRange = true;
+            OnPlayerEnterEvent();
         }
     }
 
@@ -38,7 +34,7 @@ public class Interaction : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            image.SetActive(false);
+            OnPlayerExitEvent();
         }
     }
 }

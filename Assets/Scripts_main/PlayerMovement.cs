@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     public float moveSpeed = 5f;
 
+    public int coins;
+
     public Transform weaponTrans,wpTrans;
     public Transform pointRight, pointLeft;
 
@@ -57,14 +59,31 @@ public class PlayerMovement : MonoBehaviour
         if (rb.position.x > mousePos.x)
         {
             playerSprite.flipX = true;
-            weaponTrans.GetComponentInChildren<SpriteRenderer>().flipY = true;
-            weaponTrans.position = pointLeft.position;
+            if (weaponTrans != null)
+            {
+                SpriteRenderer sprite;
+                if(sprite = weaponTrans.GetComponentInChildren<SpriteRenderer>())
+                {
+                    sprite.flipY = true;
+                }
+                weaponTrans.position = pointLeft.position;
+            }
+            
         }
         else if (rb.position.x < mousePos.x) 
         {
             playerSprite.flipX = false;
-            weaponTrans.GetComponentInChildren<SpriteRenderer>().flipY = false;
-            weaponTrans.position = pointRight.position;
+            if(weaponTrans != null)
+            {
+                SpriteRenderer sprite;
+                if(sprite = weaponTrans.GetComponentInChildren<SpriteRenderer>())
+                {
+                    sprite.flipY = false;
+                    
+                }
+                weaponTrans.position = pointRight.position;
+            }
+            
         }
     }
 
